@@ -10,10 +10,10 @@
 
 	<body>
 		<header>
-			<img src="./assets/logo.png">
+			<img src="./assets/logo2.png">
 		</header>
 		<?php
-			//$conn = openConnection();			REMEMBER to READD this when doing database integration!
+			//$conn = openConnection();			REMEMBER to RE-ADD this when doing database integration!
 
 			$userName = $_POST["userName"];
 			$password = $_POST["password"];

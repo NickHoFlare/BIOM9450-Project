@@ -9,7 +9,7 @@
 		        </tr>
 		        <tr>
 		            <td>Password:</td>
-		            <td><input type=\"text\" id=\"password\" name=\"password\" placeholder=\"Password\" onChange=\"validPassword()\"></td>
+		            <td><input type=\"password\" id=\"password\" name=\"password\" placeholder=\"Password\" onChange=\"validPassword()\"></td>
 		            <td id=\"passwordError\"></td>
 		        </tr>
 		        <tr>

@@ -9,7 +9,7 @@
 
 	<body>
 		<header>
-			<a href="./index.php"><img src="./assets/logo.png"></a>
+			<a href="./index.php"><img src="./assets/logo2.png"></a>
 		</header>
 		<h4>Hello and welcome to the Falls Management System. Please login below if you are a practitioner or administrator.</h4>
 		<?php include("./login.php"); ?>

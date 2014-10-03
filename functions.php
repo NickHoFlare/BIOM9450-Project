@@ -22,14 +22,28 @@
 	// in the Practitioners table.
 	// Return True if Yes.
 	function userExists($userName, $password, $conn) {
-		$regQueries = "SELECT * FROM Practitioners";
-		$results = odbc_exec($conn,$regQueries);
+		$regQueries = "SELECT * FROM Practitioners;";
+		$practitioners = odbc_exec($conn,$regQueries);
 		
-		while(odbc_fetch_row($results)) {
-			$dbUser = odbc_result($results,"Username"));
-			$dbPass = odbc_result($results,"Password"));
+		while(odbc_fetch_row($practitioners)) {
+			$dbUser = odbc_result($practitioners,"Username"));
+			$dbPass = odbc_result($practitioners,"Password"));
 			
 			if ($dbUser == $userName && $dbPass == $password) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	function isAdmin($userName, $conn) {
+		$regQueries = "SELECT * FROM Practitioners WHERE Administrator = true;";
+		$administrators = odbc_exec($conn,$regQueries);
+		
+		while(odbc_fetch_row($administrators)) {
+			$dbUser = odbc_result($administrators,"Username"));
+			
+			if ($dbUser == $userName) {
 				return true;
 			}
 		}
@@ -41,5 +55,13 @@
 			return true;
 		}
 		return false;
+	}
+
+	function isAdmin($userName) {
+		if ($userName == "nick") {
+			return true;
+		} else {
+			return false;
+		}
 	}
 ?>
