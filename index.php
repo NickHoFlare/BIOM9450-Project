@@ -4,12 +4,14 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link rel="stylesheet" href="./style.css">
 		<script src="./formVerification.js"></script>
+		<?php session_destroy(); ?>
 		<title>Falls Management System</title>
 	</head>
 
 	<body>
 		<header>
 			<a href="./index.php"><img src="./assets/logo3.png"></a>
+			<hr>
 		</header>
 		<h4>Hello and welcome to the Falls Management System. Please login below if you are a practitioner or administrator.</h4>
 		<?php include("./login.php"); ?>

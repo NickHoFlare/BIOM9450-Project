@@ -7,7 +7,7 @@
 			include("./functions.php");
 			session_start();
 		?>
-		<title>Control Panel</title>
+		<title>View Subjects</title>
 	</head>
 
 	<body>
@@ -18,21 +18,14 @@
 				<input type="submit" id="logoutSubmit" value="Log Out"/></td>
 			</form>
 		</header>
+		<form id="insertSubjects" method="POST" action="./insertSubjects.php">
+			<input type="submit" id="insertSubjectSubmit" value="Insert Subject"/>
+	  	</form>
 		<?php
-			// User has already been identified as legitimate in the check made in verifyLogin.
-			// Just need username for further checks.
-			$userName = $_SESSION['userName'];
+			$isAdmin = $_SESSION['isAdmin'];
+			$conn = openConnection();
 
-			echo "<h4>Welcome $userName, What would you like to do today?</h4>";
-			
-			//TODO: Switch to DB version.
-			if (isAdmin($userName)) {
-				$_SESSION['isAdmin'] = true;
-				include("./adminControls.php");
-			} else {
-				$_SESSION['isAdmin'] = false;
-				include("./practControls.php");
-			}
+			displaySubjects($conn, $isAdmin);
 		?>
 		
 	</body>

@@ -11,6 +11,7 @@
 	<body>
 		<header>
 			<img src="./assets/logo3.png">
+			<hr>
 		</header>
 		<?php
 			//$conn = openConnection();			REMEMBER to RE-ADD this when doing database integration!
