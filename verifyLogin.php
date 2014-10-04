@@ -10,16 +10,18 @@
 
 	<body>
 		<header>
-			<img src="./assets/logo2.png">
+			<img src="./assets/logo3.png">
 		</header>
 		<?php
 			//$conn = openConnection();			REMEMBER to RE-ADD this when doing database integration!
 
-			$userName = $_POST["userName"];
-			$password = $_POST["password"];
+			$userName = $_POST['userName'];
+			$password = $_POST['password'];
 
 			//if (userExists($userName, $password, $conn) {
 			if (userExists($userName, $password)) {
+				session_start();
+				$_SESSION['userName'] = $userName; // store session data
 				header("Location: ./controlPanel.php"); /* Redirect browser */
 			} else {
 				echo "<p class=\"error-HTML\">Your entered details are incorrect. Please enter a correct username and password to log in.</p>";

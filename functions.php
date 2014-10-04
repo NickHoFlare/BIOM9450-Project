@@ -51,7 +51,7 @@
 	}
 */
 	function userExists($userName, $password) {
-		if ($userName == "nick" && $password == "password") {
+		if (($userName == "nick" || $userName == "tom") && $password == "password") {
 			return true;
 		}
 		return false;
