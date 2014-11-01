@@ -1,6 +1,6 @@
 <?php
 	echo "<div class=\"login-form\">
-		<form id=\"registrationForm\" onSubmit=\"return validInfo()\" method=\"POST\" action=\"./verifyLogin.php\">
+		<form id=\"registrationForm\" onSubmit=\"return validLoginInfo()\" method=\"POST\" action=\"./verifyLogin.php\">
 			<table class=\"form-table\">
 		        <tr>
 		            <td>Username:</td>

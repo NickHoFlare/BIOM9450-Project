@@ -14,16 +14,17 @@
 			<hr>
 		</header>
 		<?php
-			//$conn = openConnection();			REMEMBER to RE-ADD this when doing database integration!
+			$conn = openConnection();			//REMEMBER to RE-ADD this when doing database integration!
 
 			$userName = $_POST['userName'];
 			$password = $_POST['password'];
 
-			//if (userExists($userName, $password, $conn) {
-			if (userExists($userName, $password)) {
+			if (userExists($userName, $password, $conn)) {				// LAB
+			//if (userExists($userName, $password)) {					// HOME
 				session_start();
-				$_SESSION['userName'] = $userName; // store session data
-				header("Location: ./controlPanel.php"); /* Redirect browser */
+				$_SESSION['userName'] = $userName; 						// store session data (logged in username and corresponding pracID)
+				$_SESSION['pracID'] = getPracID($conn, $userName);				
+				header("Location: ./ControlPanels/controlPanel.php"); 	// Redirect browser 
 			} else {
 				echo "<p class=\"error-HTML\">Your entered details are incorrect. Please enter a correct username and password to log in.</p>";
 				include("./login.php");

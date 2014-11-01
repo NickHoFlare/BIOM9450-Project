@@ -4,7 +4,11 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link rel="stylesheet" href="./style.css">
 		<script src="./formVerification.js"></script>
-		<?php session_destroy(); ?>
+		<?php 
+			session_start(); 
+			session_unset(); 
+			session_destroy();  
+		?>
 		<title>Falls Management System</title>
 	</head>
 

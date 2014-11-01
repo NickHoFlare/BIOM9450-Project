@@ -26,12 +26,12 @@
 	// in the Practitioners table.
 	// Return True if Yes.
 	function userExists($userName, $password, $conn) {
-		$regQueries = "SELECT * FROM Practitioners;";
-		$practitioners = odbc_exec($conn,$regQueries);
+		$query = "SELECT * FROM Practitioners";
+		$practitioners = odbc_exec($conn,$query);
 		
 		while(odbc_fetch_row($practitioners)) {
-			$dbUser = odbc_result($practitioners,"Username"));
-			$dbPass = odbc_result($practitioners,"Password"));
+			$dbUser = odbc_result($practitioners,"Username");
+			$dbPass = odbc_result($practitioners,"Password");
 			
 			if ($dbUser == $userName && $dbPass == $password) {
 				return true;
@@ -41,11 +41,11 @@
 	}
 
 	function isAdmin($userName, $conn) {
-		$regQueries = "SELECT * FROM Practitioners WHERE Administrator = true;";
-		$administrators = odbc_exec($conn,$regQueries);
+		$query = "SELECT * FROM Practitioners WHERE Administrator = true";
+		$administrators = odbc_exec($conn,$query);
 		
 		while(odbc_fetch_row($administrators)) {
-			$dbUser = odbc_result($administrators,"Username"));
+			$dbUser = odbc_result($administrators,"Username");
 			
 			if ($dbUser == $userName) {
 				return true;
@@ -54,29 +54,43 @@
 		return false;
 	}
 
-	function displaySubjects($conn, $isAdmin) {
+	function getPracID($conn, $userName) {
+		//$query = "SELECT Prac_ID from Practitioners WHERE Username = '$userName'";
+		$query = "SELECT Prac_ID from Practitioners WHERE Username = '$userName'";
+		$result = odbc_exec($conn,$query);
+		$pracID = odbc_result($result,"Prac_ID");
+		return $pracID;
+	}
+
+	function displaySubjects($conn, $isAdmin, $pracID) {
 		if ($isAdmin) {
-			$regQueries = "SELECT * FROM Subjects;";
+			$query = "SELECT * FROM Subjects";
 		} else {
-			// TODO: Make a query that searches for subjects that are related to the practitioner that is currently logged in.
-			$regQueries = "SELECT * FROM Subjects WHERE"
+			$query = "SELECT s.Subject_ID, s.FirstName, s.LastName, s.BirthDate, s.Sex 
+						FROM Subjects s INNER JOIN Relationships r 
+						ON r.Subject_ID = s.Subject_ID 
+						WHERE r.Prac_ID = $pracID";
 		}
-		$subjects = odbc_exec($conn,$regQueries);
+		$subjects = odbc_exec($conn,$query);
 		
 		echo "<table class=\"form-table\">
-			<th>
-				<td>Subject_ID</td>
-				<td>FirstName</td>
-				<td>LastName</td>
-				<td>BirthDate</td>
-				<td>Sex</td>
-			</th>";
+			<tr>
+				<th>Subject ID</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Birth Date</th>
+				<th>Sex</th>
+			</tr>";
 		while(odbc_fetch_row($subjects)) {
-			$subjectID = odbc_result($subjects,"Subject_ID"));
-			$firstName = odbc_result($subjects,"FirstName"));
-			$lastName = odbc_result($subjects,"LastName"));
-			$birthDate = odbc_result($subjects,"BirthDate"));
-			$sex = odbc_result($subjects,"Sex"));
+			$subjectID = odbc_result($subjects,"Subject_ID");
+			$firstName = odbc_result($subjects,"FirstName");
+			$lastName = odbc_result($subjects,"LastName");
+			$birthDate = substr(odbc_result($subjects,"BirthDate"), 0, 10);
+			$bdYear = substr($birthDate, 0, 4);
+			$bdMonth = substr($birthDate, 5, 2);
+			$bdDay = substr($birthDate, 8, 2);
+			$birthDate = $bdDay."/".$bdMonth."/".$bdYear;
+			$sex = odbc_result($subjects,"Sex");
 
 			echo "<tr>
 					<td>$subjectID</td>
@@ -95,13 +109,203 @@
 						</form></td>
 				  </tr>";			
 		}
-		echo "</table>"
+		echo "</table>";
+	}
+	
+	function displayRelationships($conn, $isAdmin) {
+		if ($isAdmin) {
+			$query = "SELECT r.Rel_ID, p.Prac_ID, p.FirstName+' '+p.LastName AS Practitioner_Name, s.Subject_ID, s.FirstName +' '+s.LastName AS Subject_Name FROM Relationships r, Practitioners p, Subjects s
+WHERE s.Subject_ID = r.Subject_ID
+AND p.Prac_ID = r.Prac_ID";
+		} 
+		$relationships = odbc_exec($conn,$query);
+		
+		echo "<table class=\"form-table\">
+			<tr>
+				<th>Relationship ID</th>
+				<th>Practitioner ID</th>
+				<th>Practitioner Name</th>
+				<th>Subject ID</th>
+				<th>Subject Name</th>
+			</tr>";
+		while(odbc_fetch_row($relationships)) {
+			$relationshipID = odbc_result($relationships,"Rel_ID");
+			$pracID = odbc_result($relationships,"Prac_ID");
+			$pracName = odbc_result($relationships,"Practitioner_Name");
+			$subjectID = odbc_result($relationships,"Subject_ID");
+			$subjectName = odbc_result($relationships,"Subject_Name");
+
+			echo "<tr>
+					<td>$relationshipID</td>
+					<td>$pracID</td>
+					<td>$pracName</td>
+					<td>$subjectID</td>
+					<td>$subjectName</td>
+					<td><form id=\"fallsData\" onSubmit=\"!!!!!!!SOMETHING!!!!!!!!\" method=\"POST\" action=\"./fallsData.php\">
+							<input type=\"submit\" id=\"fallsDataSubmit\" value=\"View Falls Data\"/></td>
+						</form></td>
+					<td><form id=\"editSubject\" method=\"POST\" action=\"./editSubjects.php\">
+							<input type=\"submit\" id=\"editSubjectSubmit\" value=\"Edit\"/></td>
+						</form></td>
+					<td><form id=\"deleteSubject\" onSubmit=\"return confirm('Are you sure?');\" method=\"POST\" action=\"./viewSubjects.php\">
+							<input type=\"submit\" id=\"deleteSubjectSubmit\" value=\"Delete\"/></td>
+						</form></td>
+				  </tr>";			
+		}
+		echo "</table>";
+	}
+
+	function displayPractitioners($conn, $isAdmin) {
+		if ($isAdmin) {
+			$query = "SELECT * FROM Practitioners";
+		}
+		$practitioners = odbc_exec($conn,$query);
+		
+		echo "<table class=\"form-table\">
+			<tr>
+				<th>Practitioner ID</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Username</th>
+				<th>Password</th>
+				<th>Administrator?</th>
+			</tr>";
+		while(odbc_fetch_row($practitioners)) {
+			$pracID = odbc_result($practitioners,"Prac_ID");
+			$firstName = odbc_result($practitioners,"FirstName");
+			$lastName = odbc_result($practitioners,"LastName");
+			$userName = odbc_result($practitioners,"Username");
+			$password = odbc_result($practitioners,"Password");
+			$administrator = odbc_result($practitioners,"Administrator");
+			
+			if ($administrator) {
+				$administrator = "Yes";
+			} else {
+				$administrator = "No";
+			}
+
+			echo "<tr>
+					<td>$pracID</td>
+					<td>$firstName</td>
+					<td>$lastName</td>
+					<td>$userName</td>
+					<td>$password</td>
+					<td>$administrator</td>
+					<td><form id=\"fallsData\" onSubmit=\"!!!!!!!SOMETHING!!!!!!!!\" method=\"POST\" action=\"./fallsData.php\">
+							<input type=\"submit\" id=\"fallsDataSubmit\" value=\"View Falls Data\"/></td>
+						</form></td>
+					<td><form id=\"editSubject\" method=\"POST\" action=\"./editSubjects.php\">
+							<input type=\"submit\" id=\"editSubjectSubmit\" value=\"Edit\"/></td>
+						</form></td>
+					<td><form id=\"deleteSubject\" onSubmit=\"return confirm('Are you sure?');\" method=\"POST\" action=\"./viewSubjects.php\">
+							<input type=\"submit\" id=\"deleteSubjectSubmit\" value=\"Delete\"/></td>
+						</form></td>
+				  </tr>";			
+		}
+		echo "</table>";
+	}
+
+	function subjectAlreadyExists($firstName, $lastName, $dateOfBirth, $sex, $conn) {
+		$query = "SELECT * FROM Subjects";
+		$subjects = odbc_exec($conn,$query);
+
+		while(odbc_fetch_row($subjects)) {
+			$dbFirst = strtolower(odbc_result($subjects,"FirstName"));
+			$dbLast = strtolower(odbc_result($subjects,"LastName"));
+			$dbBirthDate = strtolower(odbc_result($subjects,"BirthDate"));
+			$bdYear = substr($dbBirthDate, 0, 4);
+			$bdMonth = substr($dbBirthDate, 5, 2);
+			$bdDay = substr($dbBirthDate, 8, 2);
+			$dbBirthDate = $bdDay."/".$bdMonth."/".$bdYear;
+			$dbSex = odbc_result($subjects,"Sex");
+			
+			if ($dbFirst == strtolower($firstName)			&& 
+				$dbLast == strtolower($lastName) 			&& 
+				$dbBirthDate == strtolower($dateOfBirth)	&&
+				$dbSex == strtolower($sex)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	function relationshipAlreadyExists($practitioner, $subject, $conn) {
+		$query = "SELECT * FROM Relationships";
+		$results = odbc_exec($conn,$query);
+
+		while(odbc_fetch_row($results)) {
+			$dbPractitioner = odbc_result($results,"Prac_ID");
+			$dbSubject = odbc_result($results,"Subject_ID");
+			
+			if ($dbPractitioner == $practitioner	&& 
+				$dbSubject == $subject) {
+				
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	function practitionerAlreadyExists($firstName, $lastName, $userName, $conn) {
+		$query = "SELECT * FROM Practitioners";
+		$practitioners = odbc_exec($conn,$query);
+
+		while(odbc_fetch_row($practitioners)) {
+			$dbFirst = strtolower(odbc_result($practitioners,"FirstName"));
+			$dbLast = strtolower(odbc_result($practitioners,"LastName"));
+			$dbUserName = odbc_result($practitioners,"Username");
+			
+			if ($dbFirst == strtolower($firstName)			&& 
+				$dbLast == strtolower($lastName) 			&& 
+				$dbBirthDate == $userName {
+					
+				return true;
+			}
+		}
+		return false;
+	}
+
+	function getLastSubjectID($conn) {
+		$query = "SELECT TOP 1 Subject_ID AS ID FROM Subjects ORDER BY Subject_ID DESC";
+		$result = odbc_exec($conn,$query);
+		
+		$lastID = odbc_result($result,"ID");
+		
+		return $lastID;
+	}
+	
+	function printPractitionerOptions($conn) {
+		$query = "SELECT * FROM Practitioners";
+		$practitioners = odbc_exec($conn,$query);
+
+		while(odbc_fetch_row($practitioners)) {
+			$pracID = odbc_result($practitioners,"Prac_ID");
+			$firstName = odbc_result($practitioners,"FirstName");
+			$lastName = odbc_result($practitioners,"LastName");
+			$fullName = $firstName." ".$lastName;
+
+			echo "<option value=\"$pracID\">$fullName</option>";
+		}
+	}
+	
+	function printSubjectOptions($conn) {
+		$query = "SELECT * FROM Subjects";
+		$subjects = odbc_exec($conn,$query);
+
+		while(odbc_fetch_row($subjects)) {
+			$subjectID = odbc_result($subjects,"Subject_ID");
+			$firstName = odbc_result($subjects,"FirstName");
+			$lastName = odbc_result($subjects,"LastName");
+			$fullName = $firstName." ".$lastName;
+
+			echo "<option value=\"$subjectID\">$fullName</option>";
+		}
 	}
 
 	/***********************************
 	****** Here ends DB functions ******
 	***********************************/
-
+/*
 	function userExists($userName, $password) {
 		if (($userName == "nick" || $userName == "tom") && $password == "password") {
 			return true;
@@ -115,5 +319,31 @@
 		} else {
 			return false;
 		}
-	}	
+	}
+	
+	// When checking names, remember to check non-case sensitive!
+	function subjectAlreadyExists($firstName, $lastName, $dateOfBirth, $sex) {
+		if ($firstName == "Tim" && $lastName == "Lambert") {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	function relationshipAlreadyExists($practitioner, $subject) {
+		if ($practitioner == "1") {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	function practitionerAlreadyExists($firstName, $lastName) {
+		if ($firstName == "Tim" && $lastName == "Lambert") {
+			return true;
+		} else {
+			return false;
+		}
+	}
+*/
 ?>
