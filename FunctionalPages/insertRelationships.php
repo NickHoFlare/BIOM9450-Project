@@ -1,5 +1,5 @@
 <?php // Insert options as Practitioner/Subject name, but actual value as their IDs.
-	include("../functions.php");
+	//include("../functions.php");
 	
 	if(session_id() == '') {
 		session_start();

@@ -16,8 +16,13 @@
 	*********************************/
 
 	// This function opens the connection to the database. Returns a reference to the open connection.
+	//function openConnection() {
+	//	$conn = odbc_connect('z3422527', '', '',SQL_CUR_USE_ODBC);
+	//	return $conn;
+	//}
+
 	function openConnection() {
-		$conn = odbc_connect('z3422527', '', '',SQL_CUR_USE_ODBC);
+		$conn = odbc_connect("Driver={Microsoft Access Driver (*.mdb)};DBQ=D:\Dropbox\Computing\Year3\BIOM9450\project\Project.mdb", '','' );
 		return $conn;
 	}
 
@@ -55,7 +60,6 @@
 	}
 
 	function getPracID($conn, $userName) {
-		//$query = "SELECT Prac_ID from Practitioners WHERE Username = '$userName'";
 		$query = "SELECT Prac_ID from Practitioners WHERE Username = '$userName'";
 		$result = odbc_exec($conn,$query);
 		$pracID = odbc_result($result,"Prac_ID");
@@ -65,23 +69,26 @@
 	function displaySubjects($conn, $isAdmin, $pracID, $searchTerms) {
 		if ($searchTerms == '') {
 			if ($isAdmin) {
-				$query = "SELECT * FROM Subjects";
+				$query = "SELECT * FROM Subjects ORDER BY Subject_ID";
 			} else {
 				$query = "SELECT s.Subject_ID, s.FirstName, s.LastName, s.BirthDate, s.Sex 
 							FROM Subjects s INNER JOIN Relationships r 
 							ON r.Subject_ID = s.Subject_ID 
-							WHERE r.Prac_ID = $pracID";
+							WHERE r.Prac_ID = $pracID
+							ORDER BY Subject_ID";
 			}
 		} else {
 			if ($isAdmin) {
 				$query = "SELECT * FROM Subjects 
 							WHERE FirstName LIKE '%$searchTerms%'
-							OR LastName LIKE '%$searchTerms%'";
+							OR LastName LIKE '%$searchTerms%'
+							ORDER BY Subject_ID";
 			} else {
 				$query = "SELECT s.Subject_ID, s.FirstName, s.LastName, s.BirthDate, s.Sex 
 							FROM Subjects s INNER JOIN Relationships r 
 							ON r.Subject_ID = s.Subject_ID 
-							WHERE r.Prac_ID = $pracID";
+							WHERE r.Prac_ID = $pracID
+							ORDER BY Subject_ID";
 			}
 		}
 		$subjects = odbc_exec($conn,$query);
@@ -111,8 +118,11 @@
 					<td>$lastName</td>
 					<td>$birthDate</td>
 					<td>$sex</td>
-					<td><form id=\"fallsData\" onSubmit=\"!!!!!!!SOMETHING!!!!!!!!\" method=\"POST\" action=\"./fallsData.php\">
+					<td><form id=\"fallsData\" method=\"POST\" action=\"./fallsData.php\">
 							<input type=\"submit\" id=\"fallsDataSubmit\" value=\"View Falls Data\"/></td>
+							<input type=\"hidden\" id=\"subjectID\" name=\"subjectID\" value=\"$subjectID\"/>
+							<input type=\"hidden\" id=\"firstName\" name=\"firstName\" value=\"$firstName\"/>
+							<input type=\"hidden\" id=\"lastName\" name=\"lastName\" value=\"$lastName\"/>
 						</form></td>
 					<td><form id=\"editSubject\" method=\"POST\" action=\"./editForm.php\">
 							<input type=\"submit\" id=\"editSubjectSubmit\" value=\"Edit\"/></td>
