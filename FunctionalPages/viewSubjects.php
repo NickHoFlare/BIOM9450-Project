@@ -28,13 +28,22 @@
 				<form id="insertSubjects" method="POST" action="./insertForm.php">
 					<input type="submit" id="insertSubjectSubmit" value="Insert Subject"/>
 					<input type="hidden" id="formType" name="formType" value="subject"/>
-			  	</form>';
+			  	</form><br>';
+				echo '<form id="searchSubjects" method="POST" action="./viewSubjects.php">
+						<input type="text" id="subjectSearch" name="subjectSearch" placeholder="search"></td>
+						<input type="submit" id="searchSubjectSubmit" value="Search Subjects"/>
+					</form>';
 
 				$isAdmin = $_SESSION['isAdmin'];
 				$pracID = $_SESSION['pracID'];
 				$conn = openConnection();
-
-				displaySubjects($conn, $isAdmin, $pracID);
+				
+				if (isset($_POST['subjectSearch'])) {
+					$searchTerms = $_POST['subjectSearch'];
+				} else {
+					$searchTerms = '';
+				}
+				displaySubjects($conn, $isAdmin, $pracID, $searchTerms);
 			} else {
 				echo "You are not authorised to view this page. Please log in.";
 				echo '<form id="login" method="POST" action="../index.php">

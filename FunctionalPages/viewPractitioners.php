@@ -28,13 +28,22 @@
 				<form id="insertPractioners" method="POST" action="./insertForm.php">
 					<input type="submit" id="insertPractitionerSubmit" value="Insert Practitioner"/>
 					<input type="hidden" id="formType" name="formType" value="practitioner"/>
-			  	</form>';
+			  	</form><br>';
+				echo '<form id="searchPractitioners" method="POST" action="./viewPractitioners.php">
+						<input type="text" id="pracSearch" name="pracSearch" placeholder="search"></td>
+						<input type="submit" id="searchPractitionerSubmit" value="Search Practitioners"/>
+					</form>';
+
 			
 				$isAdmin = $_SESSION['isAdmin'];
 				$conn = openConnection();
 
-				// TODO: Not implemented
-				displayPractitioners($conn, $isAdmin);
+				if (isset($_POST['pracSearch'])) {
+					$searchTerms = $_POST['pracSearch'];
+				} else {
+					$searchTerms = '';
+				}
+				displayPractitioners($conn, $isAdmin, $searchTerms);
 			} else {
 				echo "You are not authorised to view this page. Please log in.";
 				echo '<form id="login" method="POST" action="../index.php">

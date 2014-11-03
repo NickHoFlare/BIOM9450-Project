@@ -27,38 +27,27 @@
 			if (isset($_SESSION['userName'])) {
 				$conn = openConnection();
 				
+				$subjectID = $_POST['subjectID'];
 				$firstName = $_POST['firstName'];
 				$lastName = $_POST['lastName'];
 				$dateOfBirth = $_POST['dateOfBirth'];
 				$sex = $_POST['subjectSex'];
 
-				if (subjectAlreadyExists($firstName, $lastName, $dateOfBirth, $sex, $conn)) {
-					echo "<h1>This subject already exists! Please insert a new unique subject.</h1>";
-					include("./insertSubjects.php");			
-				} else {
-					$subjectID = getLastSubjectID($conn) + 1;
-
-					$sqlQuery = "INSERT INTO Subjects (Subject_ID, FirstName, LastName, BirthDate, Sex) VALUES ('$subjectID', '$firstName', '$lastName', '$dateOfBirth', '$sex')";
-					$result = odbc_exec($conn,$sqlQuery);
-					
-					if (!$_SESSION['isAdmin']) {
-						$pracID = $_SESSION['pracID'];
-						$sqlQuery = "INSERT INTO Relationships (Prac_ID, Subject_ID) VALUES ('$pracID', '$subjectID')";
-						$result = odbc_exec($conn,$sqlQuery);
-					}
-
-					echo "<h1>Subject added successfully!</h1>
-					<h2>Details:</h2>";
-					echo "<strong>Name: </strong>" . $firstName . " " . $lastName . "<br>" .
-					"<strong>Date of Birth: </strong>" . $dateOfBirth . "<br>" .
-					"<strong>Sex: </strong>" . $sex . "<br>";
-					
-					echo "<table class=\"form-table\">
-					<tr><form id=\"viewSubjects\" method=\"POST\" action=\"../FunctionalPages/viewSubjects.php\">
-					<td><input type=\"submit\" id=\"viewSubjectsSubmit\" value=\"View Subjects\"/></td>
-					<td>View data for all subjects.</td>
-			  		</tr></form></table>";
-				}
+				$updateQuery = "UPDATE Subjects SET FirstName = '$firstName', LastName = '$lastName', BirthDate = '$dateOfBirth', Sex = '$sex' WHERE Subject_ID = $subjectID";
+				$result = odbc_exec($conn,$updateQuery);
+				
+				echo "<h1>Subject edited successfully!</h1>
+				<h2>Details:</h2>";
+				echo "<strong>Name: </strong>" . $firstName . " " . $lastName . "<br>" .
+				"<strong>Date of Birth: </strong>" . $dateOfBirth . "<br>" .
+				"<strong>Sex: </strong>" . $sex . "<br>";
+				
+				echo "<table class=\"form-table\">
+				<tr><form id=\"viewSubjects\" method=\"POST\" action=\"../FunctionalPages/viewSubjects.php\">
+				<td><input type=\"submit\" id=\"viewSubjectsSubmit\" value=\"View Subjects\"/></td>
+				<td>View data for all subjects.</td>
+				</tr></form></table>";
+				
 			} else {
 				echo "You are not authorised to view this page. Please log in.";
 				echo '<form id="login" method="POST" action="../index.php">

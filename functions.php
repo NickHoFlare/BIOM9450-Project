@@ -62,14 +62,27 @@
 		return $pracID;
 	}
 
-	function displaySubjects($conn, $isAdmin, $pracID) {
-		if ($isAdmin) {
-			$query = "SELECT * FROM Subjects";
+	function displaySubjects($conn, $isAdmin, $pracID, $searchTerms) {
+		if ($searchTerms == '') {
+			if ($isAdmin) {
+				$query = "SELECT * FROM Subjects";
+			} else {
+				$query = "SELECT s.Subject_ID, s.FirstName, s.LastName, s.BirthDate, s.Sex 
+							FROM Subjects s INNER JOIN Relationships r 
+							ON r.Subject_ID = s.Subject_ID 
+							WHERE r.Prac_ID = $pracID";
+			}
 		} else {
-			$query = "SELECT s.Subject_ID, s.FirstName, s.LastName, s.BirthDate, s.Sex 
-						FROM Subjects s INNER JOIN Relationships r 
-						ON r.Subject_ID = s.Subject_ID 
-						WHERE r.Prac_ID = $pracID";
+			if ($isAdmin) {
+				$query = "SELECT * FROM Subjects 
+							WHERE FirstName LIKE '%$searchTerms%'
+							OR LastName LIKE '%$searchTerms%'";
+			} else {
+				$query = "SELECT s.Subject_ID, s.FirstName, s.LastName, s.BirthDate, s.Sex 
+							FROM Subjects s INNER JOIN Relationships r 
+							ON r.Subject_ID = s.Subject_ID 
+							WHERE r.Prac_ID = $pracID";
+			}
 		}
 		$subjects = odbc_exec($conn,$query);
 		
@@ -101,23 +114,38 @@
 					<td><form id=\"fallsData\" onSubmit=\"!!!!!!!SOMETHING!!!!!!!!\" method=\"POST\" action=\"./fallsData.php\">
 							<input type=\"submit\" id=\"fallsDataSubmit\" value=\"View Falls Data\"/></td>
 						</form></td>
-					<td><form id=\"editSubject\" method=\"POST\" action=\"./editSubjects.php\">
+					<td><form id=\"editSubject\" method=\"POST\" action=\"./editForm.php\">
 							<input type=\"submit\" id=\"editSubjectSubmit\" value=\"Edit\"/></td>
-						</form></td>
-					<td><form id=\"deleteSubject\" onSubmit=\"return confirm('Are you sure?');\" method=\"POST\" action=\"./viewSubjects.php\">
-							<input type=\"submit\" id=\"deleteSubjectSubmit\" value=\"Delete\"/></td>
+							<input type=\"hidden\" id=\"formType\" name=\"formType\" value=\"subject\"/>
+							<input type=\"hidden\" id=\"subjectID\" name=\"subjectID\" value=\"$subjectID\"/>
+							<input type=\"hidden\" id=\"firstName\" name=\"firstName\" value=\"$firstName\"/>
+							<input type=\"hidden\" id=\"lastName\" name=\"lastName\" value=\"$lastName\"/>
+							<input type=\"hidden\" id=\"birthDate\" name=\"birthDate\" value=\"$birthDate\"/>
+							<input type=\"hidden\" id=\"sex\" name=\"sex\" value=\"$sex\"/>
 						</form></td>
 				  </tr>";			
 		}
 		echo "</table>";
 	}
 	
-	function displayRelationships($conn, $isAdmin) {
-		if ($isAdmin) {
-			$query = "SELECT r.Rel_ID, p.Prac_ID, p.FirstName+' '+p.LastName AS Practitioner_Name, s.Subject_ID, s.FirstName +' '+s.LastName AS Subject_Name FROM Relationships r, Practitioners p, Subjects s
-WHERE s.Subject_ID = r.Subject_ID
-AND p.Prac_ID = r.Prac_ID";
-		} 
+	function displayRelationships($conn, $isAdmin, $searchTerms) {
+		if ($searchTerms == '') {
+			if ($isAdmin) {
+				$query = "SELECT r.Rel_ID, p.Prac_ID, p.FirstName+' '+p.LastName AS Practitioner_Name, s.Subject_ID, s.FirstName +' '+s.LastName AS Subject_Name FROM Relationships r, Practitioners p, Subjects s
+	WHERE s.Subject_ID = r.Subject_ID
+	AND p.Prac_ID = r.Prac_ID";
+			} 
+		} else {
+			if ($isAdmin) {
+				$query = "SELECT r.Rel_ID, p.Prac_ID, p.FirstName+' '+p.LastName AS Practitioner_Name, s.Subject_ID, s.FirstName +' '+s.LastName AS Subject_Name FROM Relationships r, Practitioners p, Subjects s
+	WHERE s.Subject_ID = r.Subject_ID
+	AND p.Prac_ID = r.Prac_ID
+	AND (p.FirstName LIKE '%$searchTerms%'
+		OR p.LastName LIKE '%$searchTerms%'
+		OR s.FirstName LIKE '%$searchTerms%'
+		OR s.LastName LIKE '%$searchTerms%')";
+			}
+		}
 		$relationships = odbc_exec($conn,$query);
 		
 		echo "<table class=\"form-table\">
@@ -141,23 +169,28 @@ AND p.Prac_ID = r.Prac_ID";
 					<td>$pracName</td>
 					<td>$subjectID</td>
 					<td>$subjectName</td>
-					<td><form id=\"fallsData\" onSubmit=\"!!!!!!!SOMETHING!!!!!!!!\" method=\"POST\" action=\"./fallsData.php\">
-							<input type=\"submit\" id=\"fallsDataSubmit\" value=\"View Falls Data\"/></td>
-						</form></td>
-					<td><form id=\"editSubject\" method=\"POST\" action=\"./editSubjects.php\">
-							<input type=\"submit\" id=\"editSubjectSubmit\" value=\"Edit\"/></td>
-						</form></td>
-					<td><form id=\"deleteSubject\" onSubmit=\"return confirm('Are you sure?');\" method=\"POST\" action=\"./viewSubjects.php\">
-							<input type=\"submit\" id=\"deleteSubjectSubmit\" value=\"Delete\"/></td>
+					<td><form id=\"deleteRelationship\" onSubmit=\"return confirm('Are you sure?');\" method=\"POST\" action=\"./deleteRelationships.php\">
+							<input type=\"hidden\" id=\"pracID\" name=\"pracID\" value=\"$pracID\"/>
+							<input type=\"hidden\" id=\"subjectID\" name=\"subjectID\" value=\"$subjectID\"/>
+							<input type=\"submit\" id=\"deleteRelationshipSubmit\" value=\"Delete\"/></td>
 						</form></td>
 				  </tr>";			
 		}
 		echo "</table>";
 	}
 
-	function displayPractitioners($conn, $isAdmin) {
-		if ($isAdmin) {
-			$query = "SELECT * FROM Practitioners";
+	function displayPractitioners($conn, $isAdmin, $searchTerms) {
+		if ($searchTerms == '') {
+			if ($isAdmin) {
+				$query = "SELECT * FROM Practitioners";
+			}
+		} else {
+			if ($isAdmin) {
+				$query = "SELECT * FROM Practitioners
+							WHERE FirstName LIKE '%$searchTerms%'
+							OR LastName LIKE '%$searchTerms%'
+							OR Username LIKE '%$searchTerms%'";
+			}
 		}
 		$practitioners = odbc_exec($conn,$query);
 		
@@ -179,9 +212,9 @@ AND p.Prac_ID = r.Prac_ID";
 			$administrator = odbc_result($practitioners,"Administrator");
 			
 			if ($administrator) {
-				$administrator = "Yes";
+				$administratorString = "Yes";
 			} else {
-				$administrator = "No";
+				$administratorString = "No";
 			}
 
 			echo "<tr>
@@ -190,15 +223,16 @@ AND p.Prac_ID = r.Prac_ID";
 					<td>$lastName</td>
 					<td>$userName</td>
 					<td>$password</td>
-					<td>$administrator</td>
-					<td><form id=\"fallsData\" onSubmit=\"!!!!!!!SOMETHING!!!!!!!!\" method=\"POST\" action=\"./fallsData.php\">
-							<input type=\"submit\" id=\"fallsDataSubmit\" value=\"View Falls Data\"/></td>
-						</form></td>
-					<td><form id=\"editSubject\" method=\"POST\" action=\"./editSubjects.php\">
-							<input type=\"submit\" id=\"editSubjectSubmit\" value=\"Edit\"/></td>
-						</form></td>
-					<td><form id=\"deleteSubject\" onSubmit=\"return confirm('Are you sure?');\" method=\"POST\" action=\"./viewSubjects.php\">
-							<input type=\"submit\" id=\"deleteSubjectSubmit\" value=\"Delete\"/></td>
+					<td>$administratorString</td>
+					<td><form id=\"editPractitioner\" method=\"POST\" action=\"./editForm.php\">
+							<input type=\"submit\" id=\"editPractitionerSubmit\" value=\"Edit\"/></td>
+							<input type=\"hidden\" id=\"formType\" name=\"formType\" value=\"practitioner\"/>
+							<input type=\"hidden\" id=\"pracID\" name=\"pracID\" value=\"$pracID\"/>
+							<input type=\"hidden\" id=\"firstName\" name=\"firstName\" value=\"$firstName\"/>
+							<input type=\"hidden\" id=\"lastName\" name=\"lastName\" value=\"$lastName\"/>
+							<input type=\"hidden\" id=\"userName\" name=\"userName\" value=\"$userName\"/>
+							<input type=\"hidden\" id=\"password\" name=\"password\" value=\"$password\"/>
+							<input type=\"hidden\" id=\"administrator\" name=\"administrator\" value=\"$administrator\"/>
 						</form></td>
 				  </tr>";			
 		}
@@ -257,7 +291,7 @@ AND p.Prac_ID = r.Prac_ID";
 			
 			if ($dbFirst == strtolower($firstName)			&& 
 				$dbLast == strtolower($lastName) 			&& 
-				$dbBirthDate == $userName {
+				$dbUserName == $userName) {
 					
 				return true;
 			}
