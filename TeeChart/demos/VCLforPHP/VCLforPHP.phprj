@@ -1,0 +1,9 @@
+[PHPProject]
+Version=2
+[Files]
+Item1=..\..\demo\FinancialChart.php
+Item2=..\..\demo\unit11.php
+Item3=..\Features\Chart Styles\Standard\LineShadow.php
+Item4=index.htm
+Item5=unit1.php
+Item6=unit2.php

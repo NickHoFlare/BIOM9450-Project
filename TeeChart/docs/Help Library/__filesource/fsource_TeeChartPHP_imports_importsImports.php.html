@@ -1,0 +1,221 @@
+<html>
+<head>
+<title>File Source for Imports.php</title>
+<link rel="stylesheet" type="text/css" href="../media/style.css">
+</head>
+<body>
+
+<table border="0" cellspacing="0" cellpadding="0" height="48" width="100%">
+  <tr>
+    <td class="header_top">TeeChartPHP</td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+  <tr>
+    <td class="header_menu">
+        
+                                    
+                              		  [ <a href="../classtrees_TeeChartPHP.html" class="menu">class tree: TeeChartPHP</a> ]
+		  [ <a href="../elementindex_TeeChartPHP.html" class="menu">index: TeeChartPHP</a> ]
+		  	    [ <a href="../elementindex.html" class="menu">all elements</a> ]
+    </td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="200" class="menu">
+	<div id="todolist">
+			<p><a href="../todolist.html">Todo List</a></p>
+	</div>
+      <b>Packages:</b><br />
+              <a href="../li_TeeChartPHP.html">TeeChartPHP</a><br />
+            <br /><br />
+                  
+      
+                </td>
+    <td>
+      <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
+
+<h1 align="center">Source for file Imports.php</h1>
+<p>Documentation is available at <a href="../TeeChartPHP/imports/_imports---Imports.php.html">Imports.php</a></p>
+<div class="src-code">
+<ol><li><div class="src-line"><a name="a1"></a><span class="src-php">&lt;?php</span></div></li>
+<li><div class="src-line"><a name="a2"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a3"></a>&nbsp;<span class="src-doc">/**</span></div></li>
+<li><div class="src-line"><a name="a4"></a><span class="src-doc">&nbsp;*&nbsp;Imports&nbsp;class</span></div></li>
+<li><div class="src-line"><a name="a5"></a><span class="src-doc">&nbsp;*</span></div></li>
+<li><div class="src-line"><a name="a6"></a><span class="src-doc">&nbsp;*&nbsp;Description:</span></div></li>
+<li><div class="src-line"><a name="a7"></a><span class="src-doc">&nbsp;*</span></div></li>
+<li><div class="src-line"><a name="a8"></a><span class="src-doc">&nbsp;*&nbsp;</span><span class="src-doc-coretag">@author</span></div></li>
+<li><div class="src-line"><a name="a9"></a><span class="src-doc">&nbsp;*&nbsp;</span><span class="src-doc-coretag">@copyright</span><span class="src-doc">&nbsp;(c)&nbsp;1995-2008&nbsp;by&nbsp;Steema&nbsp;Software&nbsp;SL.&nbsp;All&nbsp;Rights&nbsp;Reserved.&nbsp;&lt;info@steema.com&gt;</span></div></li>
+<li><div class="src-line"><a name="a10"></a><span class="src-doc">&nbsp;*&nbsp;</span><span class="src-doc-coretag">@version</span><span class="src-doc">&nbsp;1.0</span></div></li>
+<li><div class="src-line"><a name="a11"></a><span class="src-doc">&nbsp;*&nbsp;</span><span class="src-doc-coretag">@package</span><span class="src-doc">&nbsp;TeeChartPHP</span></div></li>
+<li><div class="src-line"><a name="a12"></a><span class="src-doc">&nbsp;*&nbsp;</span><span class="src-doc-coretag">@subpackage</span><span class="src-doc">&nbsp;imports</span></div></li>
+<li><div class="src-line"><a name="a13"></a><span class="src-doc">&nbsp;*&nbsp;</span><span class="src-doc-coretag">@link</span><span class="src-doc">&nbsp;http://www.steema.com</span></div></li>
+<li><div class="src-line"><a name="a14"></a><span class="src-doc">&nbsp;*/</span></div></li>
+<li><div class="src-line"><a name="a15"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a16"></a><span class="src-key">class&nbsp;</span><a href="../TeeChartPHP/imports/Imports.html">Imports</a>&nbsp;<span class="src-key">extends&nbsp;</span><a href="../TeeChartPHP/TeeBase.html">TeeBase</a></div></li>
+<li><div class="src-line"><a name="a17"></a><span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a18"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a19"></a>&nbsp;&nbsp;&nbsp;<span class="src-key">private&nbsp;</span><span class="src-var">$template</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a20"></a>&nbsp;&nbsp;&nbsp;<span class="src-key">private&nbsp;</span><span class="src-var">$xml</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a21"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a22"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">//&nbsp;Interceptors</span></div></li>
+<li><div class="src-line"><a name="a23"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">function&nbsp;</span><a href="../TeeChartPHP/imports/Imports.html#method__get">__get</a><span class="src-sym">(&nbsp;</span><span class="src-var">$property&nbsp;</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a24"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$method&nbsp;</span>=<span class="src-str">&quot;</span><span class="src-str">get{<span class="src-var">$property</span><span class="src-sym">}</span></span><span class="src-str">&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a25"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if&nbsp;</span><span class="src-sym">(&nbsp;</span><a href="http://www.php.net/method_exists">method_exists</a><span class="src-sym">(&nbsp;</span><span class="src-var">$this</span><span class="src-sym">,&nbsp;</span><span class="src-var">$method&nbsp;</span><span class="src-sym">)&nbsp;)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a26"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">$method</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a27"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a28"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a29"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a30"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">function&nbsp;</span><a href="../TeeChartPHP/imports/Imports.html#method__set">__set</a>&nbsp;<span class="src-sym">(&nbsp;</span><span class="src-var">$property</span><span class="src-sym">,</span><span class="src-var">$value&nbsp;</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a31"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$method&nbsp;</span>=<span class="src-str">&quot;</span><span class="src-str">set{<span class="src-var">$property</span><span class="src-sym">}</span></span><span class="src-str">&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a32"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if&nbsp;</span><span class="src-sym">(&nbsp;</span><a href="http://www.php.net/method_exists">method_exists</a><span class="src-sym">(&nbsp;</span><span class="src-var">$this</span><span class="src-sym">,&nbsp;</span><span class="src-var">$method&nbsp;</span><span class="src-sym">)&nbsp;)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a33"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">$method</span><span class="src-sym">(</span><span class="src-var">$value</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a34"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a35"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a36"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a37"></a>&nbsp;&nbsp;&nbsp;<span class="src-key">public&nbsp;</span><span class="src-key">function&nbsp;</span><a href="../TeeChartPHP/imports/Imports.html#methodImports">Imports</a><span class="src-sym">(</span><span class="src-var">$c</span><span class="src-sym">)</span></div></li>
+<li><div class="src-line"><a name="a38"></a>&nbsp;&nbsp;&nbsp;<span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a39"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">parent</span><span class="src-sym">::</span><a href="../TeeChartPHP/TeeBase.html#method__construct">__construct</a><span class="src-sym">(</span><span class="src-var">$c</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a40"></a>&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a41"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a42"></a>&nbsp;&nbsp;&nbsp;<span class="src-key">public&nbsp;</span><span class="src-key">function&nbsp;</span><a href="../TeeChartPHP/imports/Imports.html#methodgetTemplate">getTemplate</a><span class="src-sym">(</span><span class="src-sym">)</span></div></li>
+<li><div class="src-line"><a name="a43"></a>&nbsp;&nbsp;&nbsp;<span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a44"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if</span><span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">template&nbsp;</span>==&nbsp;<span class="src-id">null</span><span class="src-sym">)</span></div></li>
+<li><div class="src-line"><a name="a45"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a46"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">template&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../TeeChartPHP/imports/Template.html">Template</a></span><span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../TeeChartPHP/TeeBase.html#var$chart">chart</a><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a47"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a48"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a49"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">template</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a50"></a>&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a51"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a52"></a>&nbsp;&nbsp;&nbsp;<span class="src-key">public&nbsp;</span><span class="src-key">function&nbsp;</span><a href="../TeeChartPHP/imports/Imports.html#methodgetXML">getXML</a><span class="src-sym">(</span><span class="src-sym">)</span></div></li>
+<li><div class="src-line"><a name="a53"></a>&nbsp;&nbsp;&nbsp;<span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a54"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if</span><span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">xml&nbsp;</span>==&nbsp;<span class="src-id">null</span><span class="src-sym">)</span></div></li>
+<li><div class="src-line"><a name="a55"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a56"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">xml&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../TeeChartPHP/imports/XMLImport.html">XMLImport</a></span><span class="src-sym">(</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../TeeChartPHP/TeeBase.html#var$chart">chart</a><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a57"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a58"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a59"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">xml</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a60"></a>&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a61"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a62"></a><span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a63"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a64"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a65"></a><span class="src-key">class&nbsp;</span><a href="../TeeChartPHP/imports/Template.html">Template</a></div></li>
+<li><div class="src-line"><a name="a66"></a><span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a67"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a68"></a>&nbsp;&nbsp;&nbsp;<span class="src-key">private&nbsp;</span><span class="src-var">$chart</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a69"></a>&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line"><a name="a70"></a>&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line"><a name="a71"></a>&nbsp;&nbsp;&nbsp;<span class="src-key">function&nbsp;</span><a href="../TeeChartPHP/imports/Template.html#methodTemplate">Template</a>&nbsp;<span class="src-sym">(</span><span class="src-var">$c</span>=<span class="src-id">null</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a72"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">chart&nbsp;</span>=&nbsp;<span class="src-var">$c</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line"><a name="a73"></a>&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a74"></a>&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line"><a name="a75"></a>&nbsp;&nbsp;&nbsp;<span class="src-doc">/**</span></div></li>
+<li><div class="src-line"><a name="a76"></a><span class="src-doc">&nbsp;&nbsp;&nbsp;*&nbsp;</span><span class="src-doc-coretag">@return&nbsp;</span><span class="src-doc-type">TChart&nbsp;</span><span class="src-doc">Object</span></div></li>
+<li><div class="src-line"><a name="a77"></a><span class="src-doc">&nbsp;&nbsp;&nbsp;*/</span></div></li>
+<li><div class="src-line"><a name="a78"></a>&nbsp;&nbsp;&nbsp;<span class="src-key">public&nbsp;</span><span class="src-key">function&nbsp;</span><a href="../TeeChartPHP/imports/Template.html#methodfromFile">fromFile</a><span class="src-sym">(</span><span class="src-var">$fileName</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a79"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line"><a name="a80"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if&nbsp;</span><span class="src-sym">(</span><a href="http://www.php.net/file_exists">file_exists</a><span class="src-sym">(</span><span class="src-var">$fileName</span><span class="src-sym">))&nbsp;</span><span class="src-sym">{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line"><a name="a81"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$str&nbsp;</span>=&nbsp;<a href="http://www.php.net/file_get_contents">file_get_contents</a><span class="src-sym">(</span><span class="src-var">$fileName</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a82"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if&nbsp;</span><span class="src-sym">(</span><span class="src-var">$str&nbsp;</span>!=&nbsp;<span class="src-id">false</span><span class="src-sym">)</span></div></li>
+<li><div class="src-line"><a name="a83"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a84"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$newo&nbsp;</span>=&nbsp;<span class="src-id"><a href="../TeeChartPHP/SerializeManager.html">SerializeManager</a></span><span class="src-sym">::</span><a href="../TeeChartPHP/SerializeManager.html#methodinstance">instance</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">-&gt;</span><span class="src-id">unserializeObject</span><span class="src-sym">(</span><span class="src-var">$str</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line"><a name="a85"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$newo</span><span class="src-sym">-&gt;</span><span class="src-id">getGraphics3D</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">-&gt;</span><span class="src-id">img&nbsp;</span>=&nbsp;<span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">chart</span><span class="src-sym">-&gt;</span><span class="src-id">getGraphics3D</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">-&gt;</span><span class="src-id">img</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line"><a name="a86"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-var">$newo</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a87"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a88"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">else</span></div></li>
+<li><div class="src-line"><a name="a89"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a90"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">//&nbsp;There's&nbsp;not&nbsp;strings&nbsp;into&nbsp;the&nbsp;file</span></div></li>
+<li><div class="src-line"><a name="a91"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;<span class="src-str">&quot;The&nbsp;Files&nbsp;does&nbsp;not&nbsp;contain&nbsp;any&nbsp;string&nbsp;to&nbsp;import&nbsp;!&quot;</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line"><a name="a92"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a93"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line"><a name="a94"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">else</span></div></li>
+<li><div class="src-line"><a name="a95"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a96"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">//&nbsp;File&nbsp;does&nbsp;not&nbsp;exists</span></div></li>
+<li><div class="src-line"><a name="a97"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;<span class="src-str">&quot;The&nbsp;File&nbsp;doex&nbsp;not&nbsp;exists&nbsp;!&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a98"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a99"></a>&nbsp;&nbsp;&nbsp;<span class="src-sym">}&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+<li><div class="src-line"><a name="a100"></a>&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line"><a name="a101"></a><span class="src-comm">/*&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;fromXML($fileName)&nbsp;/*&nbsp;TODO&nbsp;throws&nbsp;FileNotFoundException&nbsp;{</span></div></li>
+<li><div class="src-line"><a name="a102"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;$this-&gt;fromXML(new&nbsp;BufferedInputStream(</span></div></li>
+<li><div class="src-line"><a name="a103"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new&nbsp;FileInputStream($fileName)));</span></div></li>
+<li><div class="src-line"><a name="a104"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line"><a name="a105"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a106"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;$filename;</span></div></li>
+<li><div class="src-line"><a name="a107"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;}</span></div></li>
+<li><div class="src-line"><a name="a108"></a>&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line"><a name="a109"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a110"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;fromXML($stream)</span></div></li>
+<li><div class="src-line"><a name="a111"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;{</span></div></li>
+<li><div class="src-line"><a name="a112"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$decoder&nbsp;=&nbsp;new&nbsp;XMLDecoder($stream);</span></div></li>
+<li><div class="src-line"><a name="a113"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a114"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$decoder-&gt;setExceptionListener(new&nbsp;ExceptionListener()</span></div></li>
+<li><div class="src-line"><a name="a115"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</span></div></li>
+<li><div class="src-line"><a name="a116"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;exceptionThrown($exception)</span></div></li>
+<li><div class="src-line"><a name="a117"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</span></div></li>
+<li><div class="src-line"><a name="a118"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$exception-&gt;printStackTrace();</span></div></li>
+<li><div class="src-line"><a name="a119"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span></div></li>
+<li><div class="src-line"><a name="a120"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span></div></li>
+<li><div class="src-line"><a name="a121"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);</span></div></li>
+<li><div class="src-line"><a name="a122"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a123"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$result&nbsp;=&nbsp;null;</span></div></li>
+<li><div class="src-line"><a name="a124"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try</span></div></li>
+<li><div class="src-line"><a name="a125"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</span></div></li>
+<li><div class="src-line"><a name="a126"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$result&nbsp;=&nbsp;($this-&gt;Chart)$this-&gt;decoder-&gt;readObject();</span></div></li>
+<li><div class="src-line"><a name="a127"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span></div></li>
+<li><div class="src-line"><a name="a128"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this-&gt;finally{</span></div></li>
+<li><div class="src-line"><a name="a129"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this-&gt;decoder-&gt;close();</span></div></li>
+<li><div class="src-line"><a name="a130"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span></div></li>
+<li><div class="src-line"><a name="a131"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a132"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(($this-&gt;chart-&gt;getParent()&nbsp;!=&nbsp;null))</span></div></li>
+<li><div class="src-line"><a name="a133"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(($this-&gt;com-&gt;steema-&gt;teechart-&gt;TChart)($this-&gt;chart-&gt;getParent()))-&gt;setChart($result);</span></div></li>
+<li><div class="src-line"><a name="a134"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a135"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;$result;</span></div></li>
+<li><div class="src-line"><a name="a136"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;}</span></div></li>
+<li><div class="src-line"><a name="a137"></a><span class="src-comm">*/</span></div></li>
+<li><div class="src-line"><a name="a138"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a139"></a><span class="src-comm">/*&nbsp;TODO</span></div></li>
+<li><div class="src-line"><a name="a140"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;fromFile($fileName)&nbsp;throws&nbsp;FileNotFoundException,</span></div></li>
+<li><div class="src-line"><a name="a141"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;IOException,&nbsp;ClassNotFoundException{</span></div></li>
+<li><div class="src-line"><a name="a142"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;return&nbsp;fromStream(new&nbsp;BufferedInputStream(new&nbsp;FileInputStream(</span></div></li>
+<li><div class="src-line"><a name="a143"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;fileName)));</span></div></li>
+<li><div class="src-line"><a name="a144"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;}</span></div></li>
+<li><div class="src-line"><a name="a145"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a146"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;fromFile($file)throws&nbsp;FileNotFoundException,</span></div></li>
+<li><div class="src-line"><a name="a147"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;IOException,&nbsp;ClassNotFoundException{</span></div></li>
+<li><div class="src-line"><a name="a148"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;return&nbsp;fromFile(file&nbsp;.&nbsp;getPath());</span></div></li>
+<li><div class="src-line"><a name="a149"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;}</span></div></li>
+<li><div class="src-line"><a name="a150"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a151"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;fromStream($stream)throws&nbsp;IOException,</span></div></li>
+<li><div class="src-line"><a name="a152"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;ClassNotFoundException{</span></div></li>
+<li><div class="src-line"><a name="a153"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;ObjectInputStream&nbsp;in&nbsp;=&nbsp;new&nbsp;ObjectInputStream(stream);</span></div></li>
+<li><div class="src-line"><a name="a154"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;Chart&nbsp;result&nbsp;=&nbsp;null;</span></div></li>
+<li><div class="src-line"><a name="a155"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;try</span></div></li>
+<li><div class="src-line"><a name="a156"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;{</span></div></li>
+<li><div class="src-line"><a name="a157"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;(Chart)in&nbsp;.&nbsp;readObject();</span></div></li>
+<li><div class="src-line"><a name="a158"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}finally{</span></div></li>
+<li><div class="src-line"><a name="a159"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;.&nbsp;close();</span></div></li>
+<li><div class="src-line"><a name="a160"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span></div></li>
+<li><div class="src-line"><a name="a161"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;result;</span></div></li>
+<li><div class="src-line"><a name="a162"></a><span class="src-comm">&nbsp;&nbsp;&nbsp;}</span></div></li>
+<li><div class="src-line"><a name="a163"></a><span class="src-comm">*/</span></div></li>
+<li><div class="src-line"><a name="a164"></a><span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a165"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a166"></a><span class="src-php">?&gt;</span></div></li>
+</ol>
+</div>
+        <div class="credit">
+		    <hr />
+		    Documentation generated on Wed, 16 Jun 2010 12:06:28 +0200 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.1</a>
+	      </div>
+      </td></tr></table>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>

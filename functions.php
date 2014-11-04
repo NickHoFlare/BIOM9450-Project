@@ -1,16 +1,4 @@
 <?php
-	// This function converts the raw data in ecg.txt into the final form that will be plotted on the graph.
-	// For each item in the array, multiply by 5 and divide by 4095 to normalize the values from 0-4095 to 0-5.
-	// Then, subtract each value by 2.5 to bring the values to the range -2.5-2.5
-	// Then, divide by 450 to reverse the effect of the gain
-	// Finally, multiply by 1000 to convert the values from V to mV.
-	function convertData($array) {
-		for ($i = 0 ; $i < sizeof($array) ; $i++) {
-			$array[$i] = (($array[$i] * 5 / 4095) - 2.5) / 450 * 1000 ;
-		}
-		return $array;
-	}
-
 	/********************************* 
 	****** Here be DB functions ******
 	*********************************/
@@ -75,20 +63,24 @@
 							FROM Subjects s INNER JOIN Relationships r 
 							ON r.Subject_ID = s.Subject_ID 
 							WHERE r.Prac_ID = $pracID
-							ORDER BY Subject_ID";
+							ORDER BY s.Subject_ID";
 			}
 		} else {
 			if ($isAdmin) {
 				$query = "SELECT * FROM Subjects 
 							WHERE FirstName LIKE '%$searchTerms%'
 							OR LastName LIKE '%$searchTerms%'
+							OR Subject_ID LIKE '%$searchTerms%'
 							ORDER BY Subject_ID";
 			} else {
 				$query = "SELECT s.Subject_ID, s.FirstName, s.LastName, s.BirthDate, s.Sex 
 							FROM Subjects s INNER JOIN Relationships r 
 							ON r.Subject_ID = s.Subject_ID 
 							WHERE r.Prac_ID = $pracID
-							ORDER BY Subject_ID";
+							AND (s.FirstName LIKE '%$searchTerms%'
+							OR s.LastName LIKE '%$searchTerms%'
+							OR r.Subject_ID LIKE '%$searchTerms%')
+							ORDER BY s.Subject_ID";
 			}
 		}
 		$subjects = odbc_exec($conn,$query);
@@ -148,12 +140,15 @@
 		} else {
 			if ($isAdmin) {
 				$query = "SELECT r.Rel_ID, p.Prac_ID, p.FirstName+' '+p.LastName AS Practitioner_Name, s.Subject_ID, s.FirstName +' '+s.LastName AS Subject_Name FROM Relationships r, Practitioners p, Subjects s
-	WHERE s.Subject_ID = r.Subject_ID
-	AND p.Prac_ID = r.Prac_ID
-	AND (p.FirstName LIKE '%$searchTerms%'
-		OR p.LastName LIKE '%$searchTerms%'
-		OR s.FirstName LIKE '%$searchTerms%'
-		OR s.LastName LIKE '%$searchTerms%')";
+							WHERE s.Subject_ID = r.Subject_ID
+							AND p.Prac_ID = r.Prac_ID
+							AND (p.FirstName LIKE '%$searchTerms%'
+								OR p.LastName LIKE '%$searchTerms%'
+								OR s.FirstName LIKE '%$searchTerms%'
+								OR s.LastName LIKE '%$searchTerms%'
+								OR p.Prac_ID LIKE '%$searchTerms%'
+								OR s.Subject_ID LIKE '%$searchTerms%')
+							ORDER BY r.Rel_ID";
 			}
 		}
 		$relationships = odbc_exec($conn,$query);
@@ -199,7 +194,8 @@
 				$query = "SELECT * FROM Practitioners
 							WHERE FirstName LIKE '%$searchTerms%'
 							OR LastName LIKE '%$searchTerms%'
-							OR Username LIKE '%$searchTerms%'";
+							OR Username LIKE '%$searchTerms%'
+							OR Prac_ID LIKE '%$searchTerms%'";
 			}
 		}
 		$practitioners = odbc_exec($conn,$query);
@@ -345,49 +341,23 @@
 			echo "<option value=\"$subjectID\">$fullName</option>";
 		}
 	}
-
-	/***********************************
-	****** Here ends DB functions ******
-	***********************************/
-/*
-	function userExists($userName, $password) {
-		if (($userName == "nick" || $userName == "tom") && $password == "password") {
-			return true;
+	
+	function convertMarkers($array) {
+		for ($i = 0 ; $i < sizeof($array) ; $i++) {
+			$array[$i] = $array[$i] * 25 / 1000;
 		}
-		return false;
-	}
-
-	function isAdmin($userName) {
-		if ($userName == "nick") {
-			return true;
-		} else {
-			return false;
-		}
+		return $array;
 	}
 	
-	// When checking names, remember to check non-case sensitive!
-	function subjectAlreadyExists($firstName, $lastName, $dateOfBirth, $sex) {
-		if ($firstName == "Tim" && $lastName == "Lambert") {
-			return true;
-		} else {
-			return false;
+	// This function converts the raw data in ecg.txt into the final form that will be plotted on the graph.
+	// For each item in the array, multiply by 5 and divide by 4095 to normalize the values from 0-4095 to 0-5.
+	// Then, subtract each value by 2.5 to bring the values to the range -2.5-2.5
+	// Then, divide by 450 to reverse the effect of the gain
+	// Finally, multiply by 1000 to convert the values from V to mV.
+	function convertData($array) {
+		for ($i = 0 ; $i < sizeof($array) ; $i++) {
+			$array[$i] = (($array[$i] * 3 / 4095) - 1.5);
 		}
+		return $array;
 	}
-
-	function relationshipAlreadyExists($practitioner, $subject) {
-		if ($practitioner == "1") {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	function practitionerAlreadyExists($firstName, $lastName) {
-		if ($firstName == "Tim" && $lastName == "Lambert") {
-			return true;
-		} else {
-			return false;
-		}
-	}
-*/
 ?>

@@ -51,6 +51,13 @@ if (isset($_SESSION['userName']) && $_SESSION['isAdmin']) {
 				<td>Insert data for a new practitioner.</td>
 				<input type=\"hidden\" id=\"formType\" name=\"formType\" value=\"practitioner\"/>
 		  </tr></form>";
+	
+	// Accesses the page that serves the Data Trend Graph
+	echo "<tr><form id=\"dataTrendGraph\" method=\"POST\" action=\"../PlotPages/dataTrend.php\">
+				<td><input type=\"submit\" id=\"dataTrendSubmit\" value=\"Data Trend Graph\"/></td>
+				<td>View a graph representing 'TrueFallsRisk' against Subject age.</td>
+		  </tr></form>";
+
 	echo "</table>";
 } else {
 	echo "You are not authorised to view this page. Please log in.";

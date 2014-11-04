@@ -1,0 +1,29 @@
+[OpenFiles]
+Module1=..\..\sources\TChart.php
+Module2=..\Features\index.html
+Module3=..\Features\content3.php
+Module4=..\..\demo\unit11.php
+[..\..\sources\TChart.php]
+Line=0
+Position=0
+[E:\Steema\Root\TeeChart PHP\Version 1\sources\TChart.php]
+BreakpointCount=0
+[..\Features\index.html]
+Line=0
+Position=0
+[E:\Steema\Root\TeeChart PHP\Version 1\demos\Features\index.html]
+BreakpointCount=0
+[..\Features\content3.php]
+Line=0
+Position=0
+[E:\Steema\Root\TeeChart PHP\Version 1\demos\Features\content3.php]
+BreakpointCount=0
+[..\..\demo\unit11.php]
+Line=0
+Position=0
+[E:\Steema\Root\TeeChart PHP\Version 1\demo\unit11.php]
+BreakpointCount=0
+[Watches]
+Watchcount=0
+[Status]
+OpenModule=..\Features\index.html

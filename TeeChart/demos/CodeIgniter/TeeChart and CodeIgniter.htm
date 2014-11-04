@@ -1,0 +1,165 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<style type="text/css">
+
+body {
+ background-color: #fff;
+ margin: 40px;
+ font-family: Lucida Grande, Verdana, Sans-serif;
+ font-size: 14px;
+ color: #4F5155;
+}
+
+h2 {
+ color: #444;
+ background-color: transparent;
+ border-bottom: 1px solid #D0D0D0;
+ font-size: 16px;
+ font-weight: bold;
+ margin: 24px 0 2px 0;
+ padding: 5px 0 6px 0;
+}
+</style>
+
+<title>TeeChart and CodeIgniter</title>
+</head>
+
+<body>
+
+<h3>&nbsp;</h3>
+<h3>Introduciton</h3>
+TeeChart for PHP can be used as a library for CodeIgniter. It allows you to setup a Chart with with a few lines of code the easy way. This library includes many Chart styles, Functions, Tools and lot of features which makes it very customisable.
+
+Don't forget to check the <a href="http://www.steema.com/products/teechart/php/demos/Features/">Online Demo</a> from our web site.
+
+
+
+<h3>Requirements</h3>
+
+GD Library.
+PHP5 or above.
+
+<h3>Features</h3>
+
+Please check all the <a href="http://www.steema.com/products/teechart/php/specifications.html">Features</a>
+
+
+<h3>Installation</h3>
+
+<b>1)</b> Download TeeChart for PHP and copy the contents of the “source” folder to the “system/libraries/teechart” directory.
+If you're using the Eval version you will need to download the PHPExpress loaders, copy them into the webroot folder and set as an extension. You can find detailed instructions in the Install.txt file (included with the zip installer).
+<b>2)</b> Create a directory “temp” in your document root (same directory as your index.php) to store the generated charts.  Make sure this directory is writable by Apache.
+<b>3)</b> If you use mod_rewrite, add the “temp” directory to your .htaccess exclusion list.  
+
+<h3>Example of use</h3>
+
+<h3>Controller</h3>
+
+Create a new Controller called "teechart" which will be used to load the TeeChart library, to setup the Chart and load the view.
+
+
+
+
+<p>&lt;?php<br>
+<br>
+class TeeChart extends Controller {<br>
+<br>
+function TeeChart()<br>
+{<br>
+parent::Controller();<br>
+<br>
+$this-&gt;load-&gt;helper('url'); <br>
+$this-&gt;load-&gt;library('teechart/TChart'); <br>
+}<br>
+<br>
+function index()<br>
+{<br>
+<br>
+$data['title'] = &quot;Using TeeChart from CodeIgniter&quot;; <br>
+<br>
+// Setup Chart<br>
+// The Data could com from a function defined into the model, which could be 
+adquired <br>
+// from a database.<br>
+$ydata = array(20,20,20,20,20); <br>
+$labels = array('Cars','Phones','Bikes','Computers','Motorbikes'); <br>
+<br>
+$chart = new TChart(500,350);<br>
+$chart-&gt;getChart()-&gt;getHeader()-&gt;setText(&quot;Pie Style&quot;);<br>
+$chart-&gt;getChart()-&gt;getAspect()-&gt; setChart3DPercent(35);<br>
+<br>
+// Here we use the Pie Style, but TeeChart includes many Series types (like Bar,
+<br>
+// HorizBar, Line, HorizLine, Area, HorizArea, Candle, Volume, etc.. ). Check 
+them !<br>
+<br>
+$pie=new Pie($chart-&gt;getChart());<br>
+$pie-&gt;getMarks()-&gt;setVisible(true);<br>
+$pie-&gt;getMarks()-&gt;setTransparent(true);<br>
+$pie-&gt;getMarks()-&gt;setArrowLength(-65);<br>
+$pie-&gt;getMarks()-&gt;getArrow()-&gt;setVisible(false);<br>
+$pie-&gt;setCircled(true);<br>
+ThemesList::applyTheme($chart-&gt;getChart(),1); // BlackIsBack <br>
+$pie-&gt;getMarks()-&gt;getFont()-&gt;setColor(Color::Black());<br>
+<br>
+// Setup the Pie<br>
+$pie-&gt;setBevelPercent(20);<br>
+$pie-&gt;addArray($ydata);<br>
+$pie-&gt;setLabels($labels);<br>
+<br>
+// File locations<br>
+// Could possibly add to config file if necessary<br>
+// In the webroot (add directory to .htaccess exclude)<br>
+$chart_temp_directory = 'temp'; <br>
+<br>
+// Create the Chart and write to file <br>
+$chart-&gt;render($chart_temp_directory . '/' . 'chart.png'); <br>
+$data['chart'] = $chart_temp_directory . '/' . 'chart.png';<br>
+<br>
+$this-&gt;load-&gt;view('chart_view', $data); <br>
+}<br>
+}<br>
+?&gt; </p>
+
+
+
+
+<h3>View</h3>
+
+Now we just have to create the view called "chart_view" which will output the generated file.
+
+
+
+
+<p>&lt;html&gt;<br>
+&lt;head&gt;<br>
+&lt;title&gt;&lt;?php echo $title?&gt;&lt;/title&gt;<br>
+&lt;/style&gt;<br>
+&lt;/head&gt; <br>
+&lt;body&gt;<br>
+&lt;h2&gt;&lt;?php echo $title;?&gt;&lt;/h2&gt;<br>
+&lt;br&gt;<br>
+&lt;img src=&quot;&lt;?php echo base_url(). $chart?&gt;&quot;/&gt;<br>
+&lt;/body&gt;<br>
+&lt;/html&gt; <br>
+&nbsp;</p>
+
+
+
+
+<h3>Output</h3>
+
+That’s it!  On my configuration, I run the file as <a href="http://mysite/chart">http://mysite/chart</a>.<p>
+
+<img src="teechart.png"/>
+
+
+</p>
+<p>&nbsp;</p>
+<p>Enjoy with TeeChart for PHP ! </p>
+<p><a href="http://www.steema.com/">Steema Software</a></p>
+</body>
+
+</html>

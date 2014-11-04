@@ -1,0 +1,91 @@
+==========================================================
+ TeeChart for PHP version 1
+
+ Copyright (c) 2006-2010
+ by Steema Software SL
+ All Rights Reserved.
+
+ http://www.teechart.com
+ http://support.steema.com
+ http://www.steema.com 
+ email: general: info@steema.com
+ support forum: http://www.teechart.net/support/index.php
+
+==========================================================
+
+Release Notes Notes 16th June 2010
+Build 1.6.16.000 
+-----------------------
+
+1)  GridBand Tool draws centered GridBands
+    when GridCentered is set to true for
+    the Axis.
+2)  Logarithmic axes don't work, now fixed.
+3)  Bar and Horiz. Bar Series now can be 
+    drawn in some styles (Rectangle, Cylinder,
+    Arrow, Cone, Ellipse, InvArrow, Pyramid
+    and InvPyramid).
+    
+4)  Added support for Gradient on most of
+    the Chart objects (also for some Series
+    types).
+5)  New Arrow series type added.
+6)  New Bezier Series type added.
+7)  Stairs mode for 2D line does not work
+    fine, now fixed.
+8)  Area Lines couldn't be displayed, now
+    fixed.
+9)  Tutorials have been improved, part of 
+    codes fixed.
+10) Added Gradient support for the 
+    rectangle objects, like Legend, Bars,
+    etc.
+11) Adding Null points does not paint as
+    transparent color, now fixed.
+12) Transparency doesn't work for some 
+    objects like Legend, now fixed.
+13) Added support for Transparency on 
+    Area Series.
+
+
+Release Notes Notes 18th July 2009
+Build 1.5.9.717 
+-----------------------
+
+ 1) New Smoothing Function.
+ 2) Export to Flash/Flex (flex sdk needs
+    to be installed on the system and
+    \bin path must be added as PATH into
+    the environment variables.
+ 3) New Events.
+ 4) Now includes several themes to be 
+    applied to the Chart.
+ 5) Native (TEP) Export and Import.
+ 6) Shadow for 2D Line Series.
+ 7) New Tools.
+ 8) New Series Types.
+ 9) Flash / Flex export demo added.
+10) CodeIgniter integration demo added.
+11) New color palettes.
+
+
+Fixes
+-----
+1) Improved speed creating the image.
+2) Inprovements for all the Series types.
+3) Improvements for custom axes.
+
+
+
+Release Notes Notes 20th January 2009
+Build 1.0.0.000
+-----------------------
+
+
+
+
+
+==========================================================
+Please send feedback to:
+http://www.teechart.net/support/index.php
+==========================================================

@@ -1,0 +1,71 @@
+==========================================================
+ TeeChart for PHP version 1 Free
+
+ Copyright (c) 2006-2010
+ by Steema Software SL
+ All Rights Reserved.
+
+ http://www.teechart.com
+ http://support.steema.com
+ http://www.steema.com 
+ email: general: info@steema.com
+ support forum: http://www.teechart.net/support/index.php
+
+==========================================================
+
+
+Installation instructions:
+--------------------------
+
+TeeChart for PHP is easy to install. All required files are included into the zip file. You just have to unzip the files to the
+directory you want to use.
+TeeChart does not requires any aditional Loaders to make it work.
+
+
+To be able to run the TeeChart samples included in the zip file you have to copy the extracted files into the desired path of your 
+apache server, for example \www\teechart, which gives the following result :
+
+	\www\teechart\sources\*.*
+	\www\teechart\demos\
+	\www\teechart\demos\Features
+	\www\teechart\demos\JoomlaModule
+	\www\teechart\demos\PHPDemos
+	\www\teechart\demos\VCLforPHPDemo
+	\www\teechart\docs\*.*
+
+
+Now you should be able to open your browser, point to "http://server/teechart/demos/Features" and see the Demo Features project.
+All you need to do in order to make use of the library into your projects is add the libTeeChart.php file (including the server 
+path) as a reference (include) into your php files. 
+
+
+Installation under Delphi for PHP IDE :
+---------------------------------------
+
+If you want to use the TeeChart for PHP library under the "Delphi for PHP" IDE the following steps must be taken :
+
+1) Copy the \teechart folder into the \vcl folder of "Delphi for PHP" installation, creating the following folders : 
+	
+	\Delphi for PHP\vcl\teechart
+	\Delphi for PHP\vcl\teechart\sources
+	\Delphi for PHP\vcl\teechart\demos\*,*
+	\Delphi for PHP\vcl\teechart\docs\*,*
+
+2) Copy the \teechart\sources\tchart.inc.php and \teechart\sources\tchart.ide.inc.php files into the \vcl folder of "Delphi for PHP".
+
+3) Open the "Delphi for PHP" IDE, go to "Component -> Packages" menu option, click "Add" and look for the
+   "\teechart\sources\TeeChart.package.php" file. This will add the "TeeChart for PHP Components" item into the list of installed 
+   packages. Now click OK.
+
+4) If you create a new Delphi for PHP project and go to the design page a new "TeeChart" tab should appear on the Tool Palette. 
+You will find the TChartOBj component there. You should be able to select it and place it on the Form as for any other component.
+
+-------------------------------------------------------
+
+If you plan on using TeeChart for PHP in a commercial context you will need to acquire the professional license. Commercial use is 
+for example if you use TeeChart on a site to provide a service for paying customers or for example if you are using it in an intranet 
+to provide support for internal business processes, i.e. in benefit for a commercial company.
+
+In short, if you use TeeChart where you have an economic advantage (either through paying customers or improving internal business 
+processes) this most likely falls under commercial use. 
+

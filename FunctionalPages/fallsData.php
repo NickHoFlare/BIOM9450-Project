@@ -18,8 +18,8 @@
 			<form id="logout" method="POST" action="../index.php">
 				<input type="submit" id="logoutSubmit" value="Log Out"/></td>
 			</form>
-            <form id="backToControlPanel" method="POST" action="../ControlPanels/controlPanel.php">
-				<input type="submit" id="backToControlPanelSubmit" value="Back"/></td>
+            <form id="backToViewSubjects" method="POST" action="../FunctionalPages/viewSubjects.php">
+				<input type="submit" id="backToViewSubjetsSubmit" value="Back"/></td>
 			</form>
 			<hr>
 		</header>
@@ -62,13 +62,7 @@
 		echo "</table>";
 		echo "<h3>Triax Data:</h3>";
 
-		include("../plotPages/plotTriax.php");
-        
-        
-        
-        //odbc_binmode
-        //odbc_longreadlen
-        //ob_start()
+		include("../PlotPages/plotTriax.php");
         ?>
 	</body>
 	<hr>
