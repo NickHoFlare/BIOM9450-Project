@@ -28,8 +28,7 @@
 
 			echo "<h4>Welcome $userName, What would you like to do today?</h4>";
 			
-			if (isAdmin($userName, $conn)) {		// LAB
-			//if (isAdmin($userName)) {				// HOME
+			if (isAdmin($userName, $conn)) {
 				$_SESSION['isAdmin'] = true;
 				include("./adminControls.php");
 			} else {

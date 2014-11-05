@@ -305,6 +305,26 @@
 		return false;
 	}
 
+	function dataAlreadyExists($description, $testDate, $fallsRisk, $conn) {
+		$query = "SELECT * FROM FallsRiskData";
+		$fallsRiskData = odbc_exec($conn,$query);
+
+		while(odbc_fetch_row($fallsRiskData)) {
+			$dbDescription = strtolower(odbc_result($fallsRiskData,"Description"));
+			$dbTestDate = odbc_result($fallsRiskData,"TestDate");
+			$dbFallsRisk = odbc_result($fallsRiskData,"TrueFallsRisk");
+			
+			if ($dbDescription == strtolower($description)		&& 
+				$dbTestDate == strtolower($testDate) 			&& 
+				$dbFallsRisk == $fallsRisk) {
+					
+				return true;
+			}
+		}
+		return false;
+	}
+
+
 	function getLastSubjectID($conn) {
 		$query = "SELECT TOP 1 Subject_ID AS ID FROM Subjects ORDER BY Subject_ID DESC";
 		$result = odbc_exec($conn,$query);

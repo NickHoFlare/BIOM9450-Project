@@ -10,10 +10,12 @@
 			$formType = $_POST['formType'];
 		if ($formType == "subject") {
 			echo "<title>Insert Subjects</title>";
-		} elseif ($formType == "relationship") {
+		} else if ($formType == "relationship") {
 			echo "<title>Insert Relationships</title>";
-		} else {
+		} else if ($formType == "practitioner") {
 			echo "<title>Insert Practitioners</title>";
+		} else {
+			echo "<title>Insert Falls Risk Data</title>";
 		}
 		?>
 	</head>
@@ -30,14 +32,17 @@
 			</form>
 			<hr>
 		</header>
-		</body>
+        
 		<?php 
+			// Serve different dynamic pages depending on which hidden field was provided
 			if ($formType == "subject") {
 				include("./insertSubjects.php");
-			} elseif ($formType == "relationship") {
+			} else if ($formType == "relationship") {
 				include("./insertRelationships.php");
-			} else {
+			} else if ($formType == "practitioner") {
 				include("./insertPractitioners.php");
+			} else {
+				include("./insertData.php");
 			}
 		?>
 	</body>

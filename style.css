@@ -39,3 +39,7 @@ table,th,td
 .error-HTML {
 	color: red;
 }
+
+.navbar li {
+	display: inline;
+}

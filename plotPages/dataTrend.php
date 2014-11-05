@@ -28,15 +28,21 @@
 						FROM Subjects LEFT JOIN FallsRiskData ON Subjects.Subject_ID = FallsRiskData.Subject_ID
 						GROUP BY Subjects.Subject_ID, Int((Date()-[BirthDate])/365)";
 			$dataTrend = odbc_exec($conn,$query);
+			
+			// As we obtain the data from the query, we add each piece of relevant data into an array for use by Teechart.
 			$age = array(0);
 			$fallsRisk = array(0);
 			$i = 0;
 
+			// If any subject has an age below 0, overwrite the value in that index of the array with the next value.
 			while (odbc_fetch_row($dataTrend)) {
 				$age[$i] = odbc_result($dataTrend,"Age");
 				$fallsRisk[$i] = odbc_result($dataTrend,"AvgOfTrueFallsRisk");
 				$i++;
-				// some fallsRisk are missing. If problems arise, get some way to remove these anomolies.
+	
+				if ($age[$i-1] < 0.0) {
+					$i--;
+				}
 			}  
 			
 			//Set up chart
@@ -48,7 +54,6 @@
 			$points = new Points($chart1->getChart());
 			
 			for ($j = 0 ; $j < count($fallsRisk) ; $j++) {
-				echo "age is $age[$j], fallsRisk is $fallsRisk[$j]";
 				$points->addXY($age[$j], $fallsRisk[$j]);
 			}	
 			
@@ -76,6 +81,10 @@
 				$subjectID = odbc_result($dataTrend,"Subject_ID");
 				$avgTrueFalls = odbc_result($dataTrend,"AvgOfTrueFallsRisk");
 				$age = odbc_result($dataTrend,"Age");
+
+				if ($age < 0) {
+					$age = "$age (IGNORED)";
+				}
 
 				echo "<tr>
 					<td>$subjectID</td>

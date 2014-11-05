@@ -10,8 +10,10 @@
 			$formType = $_POST['formType'];
 		if ($formType == "subject") {
 			echo "<title>Edit Subjects</title>";
-		} else {
+		} else if ($formType == "practitioner") {
 			echo "<title>Edit Practitioners</title>";
+		} else {
+			echo "<title>Edit Falls Risk Data</title>";
 		}
 		?>
 	</head>
@@ -32,8 +34,10 @@
 		<?php 
 			if ($formType == "subject") {
 				include("./editSubjects.php");
-			} else {
+			} else if ($formType == "practitioner") {
 				include("./editPractitioners.php");
+			} else {
+				include("./editData.php");
 			}
 		?>
 	</body>

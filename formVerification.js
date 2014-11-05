@@ -173,3 +173,69 @@ function validPractitionerInfo() {
 		return true;
 	}
 }
+
+// Function checks if text typed in a description field is in a valid description syntax
+function  validDescription() {
+	var description = document.getElementById('description');			
+	var regex = /^[a-zA-Z][a-zA-Z_]*$/;
+	// If the captured description does not match the regex pattern, display an error message in red, and return false as an "error code".
+	if (!regex.test(description.value)) {
+		document.getElementById('descriptionError').innerHTML = 'The description entered is not valid. Do not use characters other than alphabets or underscores(_).';
+		document.getElementById('descriptionError').style.color = 'red';
+		return false;
+	// If the captured description matches the regex pattern, clear any error messages if they are present, and return true as a "success code".
+	} else {
+		document.getElementById('descriptionError').innerHTML = '';
+		return true;
+	}
+}
+
+// Function checks if user-input test date is in a valid dd/mm/yyyy format.
+function validTestDate() {
+	var testDate = document.getElementById('testDate');
+	// taken from 'http://stackoverflow.com/questions/5465375/javascript-date-regex-dd-mm-yyyy')
+	var regex = /^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$/g;
+	// If the captured test date does not match the regex pattern, display an error message in red, and return false as an "error code".
+	if (!regex.test(testDate.value)) {
+		document.getElementById('testDateError').innerHTML = 'The test date entered is not valid. Please enter a valid date in the format dd/mm/yyyy.';
+		document.getElementById('testDateError').style.color = 'red';
+		return false;
+	// If the captured test date matches the regex pattern, clear any error messages if they are present, and return true as a "success code".
+	} else {
+		document.getElementById('testDateError').innerHTML = '';
+		return true;
+	} 
+}
+
+// Function checks if the True Falls Risk entered is in a valid TFR syntax
+function validTFR() {
+	var tfr = document.getElementById('fallsRisk');			
+	
+	var regex = /^-?\d\.?\d{0,2}$/;
+
+	// If the captured tfr does not match the regex pattern, display an error message in red, and return false as an "error code".
+	if (!regex.test(tfr.value) || tfr.value > 5.0 || tfr.value < -5.0) {
+		console.log(tfr.value);
+		document.getElementById('tfrError').innerHTML = 'The Falls Risk Value entered is not valid. Please enter a number in 2 Decimal places in the range -5 <= 0 <= 5.';
+		document.getElementById('tfrError').style.color = 'red';
+		return false;
+	// If the captured tfr matches the regex pattern, clear any error messages if they are present, and return true as a "success code".
+	} else {
+		document.getElementById('tfrError').innerHTML = '';
+		return true;
+	}
+}
+
+// Function checks if all field checks have been satisfied. If yes, proceed. If not, deny progress, and popup with an alert message. 
+// This function is run upon pressing of the submit button.
+function validDataInfo() {
+	// Check that all field verification functions have returned true as success codes. If not, cause an alert popup box to appear with an error message, 
+	// and return false to prevent redirection of the page to the "successful registration page"
+	if (!(validDescription() && validTestDate() && validTFR())) {
+		alert("Please fix any errors in your provided information before the new data can be added.");
+		return false;
+	// If the field verification functions have all returned true, the user's input is valid and we allow him to proceed to the "successful registration page"
+	} else {
+		return true;
+	}
+}

@@ -37,6 +37,14 @@
         echo "<h3>Subject Name:</h3> $fullName
         <h3>Subject ID:</h3> $subjectID
         <h3>Fall Risk Trials:</h3>";
+		
+		echo "<form id=\"insertData\" method=\"POST\" action=\"./insertForm.php\">
+						<td><input type=\"submit\" id=\"insertDataSubmit\" value=\"Insert Data\"/></td>
+						<input type=\"hidden\" id=\"formType\" name=\"formType\" value=\"data\"/>
+						<input type=\"hidden\" id=\"subjectName\" name=\"subjectName\" value=\"$fullName\"/>
+						<input type=\"hidden\" id=\"subjectID\" name=\"subjectID\" value=\"$subjectID\"/>
+		  			</form>";
+
         echo "<table class=\"form-table\">
         <tr>
         	<th>Description</th>
@@ -44,7 +52,9 @@
 			<th>True Falls Risk</th>
 		</tr>";
 		
+		$dataAvailable = false;
 		while (odbc_fetch_row($fallsData)) {
+			$fallsID = odbc_result($fallsData,"FallsTest_ID");
 			$description = odbc_result($fallsData,"Description");
 			$testDate = odbc_result($fallsData,"TestDate");
 			$year = substr($testDate, 0, 4);
@@ -57,9 +67,23 @@
 					<td>$description</td>
 					<td>$shortDate</td>
 					<td>$fallsRisk</td>
-			</tr>";
+					<td><form id=\"editData\" method=\"POST\" action=\"./editForm.php\">
+						<input type=\"submit\" id=\"editDataSubmit\" value=\"Edit Data\"/></td>
+						<input type=\"hidden\" id=\"fallsID\" name=\"fallsID\" value=\"$fallsID\"/>
+						<input type=\"hidden\" id=\"formType\" name=\"formType\" value=\"data\"/>
+						<input type=\"hidden\" id=\"subjectName\" name=\"subjectName\" value=\"$fullName\"/>
+						<input type=\"hidden\" id=\"subjectID\" name=\"subjectID\" value=\"$subjectID\"/>
+						<input type=\"hidden\" id=\"description\" name=\"description\" value=\"$description\"/>
+						<input type=\"hidden\" id=\"testDate\" name=\"testDate\" value=\"$testDate\"/>
+						<input type=\"hidden\" id=\"fallsRisk\" name=\"fallsRisk\" value=\"$fallsRisk\"/>
+		  			</form></td>
+				</tr>";
+			$dataAvailable = true;
 		}
 		echo "</table>";
+		if (!$dataAvailable) {
+			echo "<h2>No Falls Data is available for this subject!</h2>";
+		}
 		echo "<h3>Triax Data:</h3>";
 
 		include("../PlotPages/plotTriax.php");

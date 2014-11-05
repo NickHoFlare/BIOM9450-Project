@@ -14,13 +14,12 @@
 			<hr>
 		</header>
 		<?php
-			$conn = openConnection();			//REMEMBER to RE-ADD this when doing database integration!
+			$conn = openConnection();
 
 			$userName = $_POST['userName'];
 			$password = $_POST['password'];
 
-			if (userExists($userName, $password, $conn)) {				// LAB
-			//if (userExists($userName, $password)) {					// HOME
+			if (userExists($userName, $password, $conn)) {
 				session_start();
 				$_SESSION['userName'] = $userName; 						// store session data (logged in username and corresponding pracID)
 				$_SESSION['pracID'] = getPracID($conn, $userName);				
